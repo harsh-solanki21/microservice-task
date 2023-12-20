@@ -1,8 +1,22 @@
 import { Request, Response } from 'express'
 import { throwValidationErrors } from '../utils/throwValidationError'
-import { _getUserByUserNo, _createUser } from '../data-access/user'
+import {
+    _getUserByUserNo,
+    _createUser,
+    _getAllUsers,
+} from '../data-access/user'
 import { NotFound } from '../errors'
 import PublishMessage from '../utils/publisher'
+
+export const getAllUsers = async (req: Request, res: Response) => {
+    throwValidationErrors(req)
+
+    const user = await _getAllUsers()
+
+    // await PublishMessage(user)
+
+    res.status(200).json(user)
+}
 
 export const getUser = async (req: Request, res: Response) => {
     throwValidationErrors(req)
