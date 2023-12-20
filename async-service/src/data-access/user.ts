@@ -1,5 +1,5 @@
 import User from '../model/User'
-import { BadRequest } from '../errors'
+import { BadRequest } from '../../../user/src/errors'
 
 export const _getAllUsers = async () => {
     try {

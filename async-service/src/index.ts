@@ -10,14 +10,14 @@ dotenv.config()
 
 const app: Express = express()
 
-SubscribeMessage()
-
 app.use(cors())
 app.use(express.json())
 
 ConnectMongo()
 
-const port: number = Number(process.env.PORT) ?? 3000
+SubscribeMessage()
+
+const port: number = Number(process.env.PORT) ?? 5001
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
