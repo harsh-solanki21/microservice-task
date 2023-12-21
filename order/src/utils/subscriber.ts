@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import CreateChannel from '../config/rabbitmq'
-import requestHandler from '../controller/requestController'
+import PublishMessage from './publisher'
 
 dotenv.config()
 
@@ -21,18 +21,9 @@ const SubscribeMessage = async () => {
             if (!correlationId || !replyTo) {
                 console.log('Missing properties...')
             }
-            // if (message.content) {
-            const msg = JSON.parse(message.content.toString())
-            const response = await requestHandler(msg)
-            // }
 
-            channel.sendToQueue(
-                replyTo,
-                Buffer.from(JSON.stringify(response)),
-                {
-                    correlationId,
-                }
-            )
+            console.log('content: ', message.content.toString())
+            await PublishMessage(JSON.parse(message.content.toString()))
         },
         {
             noAck: true,

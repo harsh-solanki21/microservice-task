@@ -10,11 +10,11 @@ export const getAllUsers = async (req: Request, res: Response) => {
     throwValidationErrors(req)
 
     const payload = {
-        query: 'GET_ALL_USERS',
+        table: 'USER',
+        query: 'GET_ALL',
     }
     await PublishMessage(payload)
     const users = await SubscribeMessage()
-    console.log(users)
 
     res.status(200).json(users)
 }
@@ -24,8 +24,9 @@ export const getUser = async (req: Request, res: Response) => {
     const { user_no } = req.params
 
     const payload = {
-        query: 'GET_USER_BY_NO',
-        user_no,
+        table: 'USER',
+        query: 'GET_BY_NO',
+        requestData: user_no,
     }
     await PublishMessage(payload)
 
@@ -36,10 +37,11 @@ export const createUser = async (req: Request, res: Response) => {
     throwValidationErrors(req)
 
     const payload = {
-        query: 'CREATE_USER',
+        table: 'USER',
+        query: 'CREATE',
         requestData: req.body,
     }
     await PublishMessage(payload)
 
-    res.status(200).json({ message: 'User Created!' })
+    res.status(200).json({ message: 'User Created' })
 }

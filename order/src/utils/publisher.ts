@@ -14,13 +14,6 @@ const PublishMessage = async (message: any) => {
     const correlationId: string = RandomGenerator()
     const msg = Buffer.from(JSON.stringify(message))
 
-    // await channel.assertExchange(exchangeName, 'direct')
-
-    // channel.publish(exchangeName, bindingKey, msg, {
-    //     correlationId,
-    //     replyTo,
-    // })
-
     await channel.assertQueue(queueName, { durable: false })
 
     channel.sendToQueue(queueName, msg, {

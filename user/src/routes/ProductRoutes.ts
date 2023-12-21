@@ -10,7 +10,7 @@ const router: Router = Router()
 
 router.get('/get/all', [], getAllProducts)
 
-router.get('/get/:order_no', [], getProduct)
+router.get('/get/:product_no', [], getProduct)
 
 router.post('/create', [...createProductValidations], createProduct)
 

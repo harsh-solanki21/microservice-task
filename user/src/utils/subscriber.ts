@@ -11,7 +11,7 @@ const SubscribeMessage = async () => {
     // const bindingKey: string = (process.env.USER_BINDING_KEY as string) || ''
 
     // await channel.assertExchange(exchangeName, 'direct', { durable: true })
-    const q = await channel.assertQueue(queueName, { exclusive: true })
+    const q = await channel.assertQueue(queueName, { durable: true })
     console.log(`Waiting for messages in queue: ${q.queue}`)
 
     // channel.bindQueue(q.queue, exchangeName, bindingKey)

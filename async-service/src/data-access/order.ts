@@ -1,4 +1,5 @@
 import Order from '../model/Order'
+import Product from '../model/Product'
 import { BadRequest } from '../errors'
 
 export const _getAllOrders = async () => {
@@ -19,9 +20,28 @@ export const _getOrderByNo = async (order_no: number) => {
     }
 }
 
-export const _createOrder = async (payload: object) => {
+export const _createOrder = async (payload: any) => {
     try {
-        const order = await Order.create(payload)
+        const { order_products, discount } = payload
+
+        let totalPrice: number = 0
+        for (let i = 0; i < order_products.length; i++) {
+            const product: any = await Product.findById(
+                order_products[i].product_id
+            )
+            totalPrice += product.price * order_products[i].quantity
+        }
+
+        if (discount) {
+            totalPrice = totalPrice - (totalPrice * discount) / 100
+        }
+
+        const order = await Order.create({
+            order_products,
+            discount: discount || 0,
+            total_order_price: totalPrice,
+        })
+
         return order
     } catch (error: any) {
         throw new BadRequest(error.message)
