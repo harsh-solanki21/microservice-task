@@ -23,17 +23,9 @@ const SubscribeMessage = async () => {
             }
             // if (message.content) {
             const msg = JSON.parse(message.content.toString())
-            const response = await requestHandler(msg)
+            const response = await requestHandler(msg, correlationId, replyTo)
             // }
             console.log('response: ', response)
-
-            channel.sendToQueue(
-                replyTo,
-                Buffer.from(JSON.stringify(response)),
-                {
-                    correlationId,
-                }
-            )
         },
         {
             noAck: true,

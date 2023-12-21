@@ -3,13 +3,17 @@ import CreateChannel from '../config/rabbitmq'
 
 dotenv.config()
 
-const PublishMessage = async (message: any) => {
+const PublishMessage = async (
+    message: any,
+    correlationId: string,
+    replyTo: string
+) => {
     const channel = await CreateChannel()
 
     // const exchangeName: string = process.env.EXCHANGE_NAME as string
     // const bindingKey: string = process.env.ORDER_BINDING_KEY as string
     const queueName: string = process.env.RPC_QUEUE_TWO as string
-    const replyTo: string = process.env.REPLY_QUEUE_TWO as string
+    // const replyTo: string = process.env.REPLY_QUEUE_TWO as string
     // const correlationId: string = RandomGenerator()
     const msg = Buffer.from(JSON.stringify(message))
 
@@ -17,7 +21,7 @@ const PublishMessage = async (message: any) => {
 
     channel.sendToQueue(queueName, msg, {
         replyTo,
-        // correlationId,
+        correlationId,
         contentType: 'application/json',
     })
 

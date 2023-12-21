@@ -13,20 +13,29 @@ import {
     _getAllUsers,
     _getUserByUserNo,
 } from '../data-access/user'
+import PublishMessage from '../utils/publisher'
 
-const requestHandler = async (request: any) => {
+const requestHandler = async (
+    request: any,
+    correlationId: string,
+    replyTo: string
+) => {
     const { table, query, requestData } = request
+    let response: any
 
     if (table === 'USER') {
         switch (query) {
             case 'GET_ALL': {
-                return _getAllUsers()
+                response = await _getAllUsers()
+                break
             }
             case 'GET_BY_NO': {
-                return _getUserByUserNo(requestData)
+                response = await _getUserByUserNo(requestData)
+                break
             }
             case 'CREATE': {
-                return _createUser(requestData)
+                response = await _createUser(requestData)
+                break
             }
             default: {
                 break
@@ -37,13 +46,16 @@ const requestHandler = async (request: any) => {
     if (table === 'PRODUCT') {
         switch (query) {
             case 'GET_ALL': {
-                return _getAllProducts()
+                response = await _getAllProducts()
+                break
             }
             case 'GET_BY_NO': {
-                return _getProductByNo(requestData)
+                response = await _getProductByNo(requestData)
+                break
             }
             case 'CREATE': {
-                return _createProduct(requestData)
+                response = await _createProduct(requestData)
+                break
             }
             default: {
                 break
@@ -54,19 +66,24 @@ const requestHandler = async (request: any) => {
     if (table === 'ORDER') {
         switch (query) {
             case 'GET_ALL': {
-                return _getAllOrders()
+                response = await _getAllOrders()
+                break
             }
             case 'GET_BY_NO': {
-                return _getOrderByNo(requestData)
+                response = await _getOrderByNo(requestData)
+                break
             }
             case 'CREATE': {
-                return _createOrder(requestData)
+                response = await _createOrder(requestData)
+                break
             }
             default: {
                 break
             }
         }
     }
+
+    await PublishMessage(response, correlationId, replyTo)
 }
 
 export default requestHandler
