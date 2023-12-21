@@ -15,8 +15,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
-        service: ["user", "order", "async-service"]
+        node-version: [16.x, 18.x, 20.x]
+        service: ["user/", "order/", "async-service/"]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
