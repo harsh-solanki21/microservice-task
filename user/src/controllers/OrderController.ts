@@ -1,29 +1,29 @@
 import { Request, Response } from 'express'
-import { throwValidationErrors } from '../utils/throwValidationError'
-import PublishMessage from '../utils/publisher'
+import { throwValidationErrors } from '../../../order/src/utils/throwValidationError'
+import PublishMessage from '../../../order/src/utils/publisher'
 
 export const getAllOrders = async (req: Request, res: Response) => {
     throwValidationErrors(req)
     const { order_no } = req.params
 
-    await PublishMessage(order)
+    // await PublishMessage()
 
-    res.status(200).json(order)
+    res.status(200).json()
 }
 
 export const getOrder = async (req: Request, res: Response) => {
     throwValidationErrors(req)
     const { order_no } = req.params
 
-    await PublishMessage(order)
+    // await PublishMessage()
 
-    res.status(200).json(order)
+    res.status(200).json()
 }
 
 export const createOrder = async (req: Request, res: Response) => {
     throwValidationErrors(req)
 
-    await PublishMessage()
+    // await PublishMessage()
 
     res.status(200).json({})
 }

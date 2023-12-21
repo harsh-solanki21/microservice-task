@@ -4,23 +4,19 @@ import type { Express } from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
-import ConnectMongo from './config/mongo'
 import NotFoundRoute from './middlewares/NotFoundHandler'
 import ErrorHandlerMiddleware from './middlewares/ErrorHandler'
 import { loadRoutes } from './routes'
-import SubscribeMessage from './utils/subscriber'
 
 dotenv.config()
 
 const app: Express = express()
 
-SubscribeMessage()
-
 app.use(cors())
 app.use(express.json())
 app.use(helmet())
 
-ConnectMongo()
+// ConnectMongo()
 
 const port: number = Number(process.env.PORT) ?? 3000
 
