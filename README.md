@@ -53,7 +53,7 @@
 -   Make sure you have `nodejs v20.10.0 LTS` and `pnpm v8.12.1` package manager is installed
 
 -   Download or clone this repo into your computer.
--   In the microservice-task directory,
+-   In the microservice-task directory,\
     Run `cd user` to go into user directory and Run `pnpm i` to install necessary dependencies.
 -   Do the same for `order` and `async-service`
 
@@ -61,7 +61,7 @@
     OR\
     `pnpm start` command will compile TypeScript code into JavaScript code, making it executable in Node.js and runs the JavaScript code.
 
--   Runs the app in the development mode. Open below links to view logs.\
-    -   [http://localhost:5001](http://localhost:5001)\
-    -   [http://localhost:5002](http://localhost:5002)\
+-   Runs the app in the development mode. Open below links to view logs.
+    -   [http://localhost:5001](http://localhost:5001)
+    -   [http://localhost:5002](http://localhost:5002)
     -   [http://localhost:5003](http://localhost:5003)
