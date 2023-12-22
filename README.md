@@ -12,6 +12,8 @@
 -   Service 2 communicate with Service 3.
 -   Common database for data storage and retrieval.
 
+<br />
+
 ## Service Description:
 
 ### User-Facing Service - user (Service 1)
@@ -44,6 +46,8 @@
     -   Order table storing order information.
     -   Products table to store product details.
 
+<br/>
+
 ## Run this app locally
 
 -   Make sure you have `nodejs v20.10.0 LTS` and `pnpm v8.12.1` package manager is installed
@@ -58,8 +62,7 @@
     `or`
 -   `pnpm start` command will compile TypeScript code into JavaScript code, making it executable in Node.js and runs the JavaScript code.
 
-Runs the app in the development mode.
-Open below links to view logs.
-[http://localhost:5001](http://localhost:5001)
-[http://localhost:5002](http://localhost:5002)
-[http://localhost:5003](http://localhost:5003)
+Runs the app in the development mode. Open below links to view logs.\
+[http://localhost:5001](http://localhost:5001)\
+[http://localhost:5002](http://localhost:5002)\
+[http://localhost:5003](http://localhost:5003)\
