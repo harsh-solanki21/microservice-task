@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose'
 import bcrypt from 'bcrypt'
 import { IUser } from '../interface/user'
-import { BadRequest } from '../errors'
+import { BadRequest } from '../../../user/src/errors'
 
 const UserSchema: Schema = new Schema(
     {

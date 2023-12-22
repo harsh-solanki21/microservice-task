@@ -1,0 +1,67 @@
+version: '3'
+services:
+    nosql-db:
+        image: mvertes/alpine-mongo
+        ports:
+            - '27018:27017'
+        container_name: nosql-db
+        volumes:
+            - ./db/:/data/db
+
+    rabbitmq:
+        image: rabbitmq:alpine
+        container_name: rabbitmq
+        ports:
+            - '5672:5672'
+
+    async-service:
+        build:
+            dockerfile: Dockerfile
+            context: ./async-service
+        container_name: async-services
+        ports:
+            - '5003:5003'
+        restart: always
+        depends_on:
+            - 'nosql-db'
+            - 'rabbitmq'
+        volumes:
+            - .:/app/
+            - /app/async-service/node_modules
+        env_file:
+            - ./async-service/.env
+
+    order:
+        build:
+            dockerfile: Dockerfile
+            context: ./order
+        container_name: orders
+        ports:
+            - '5002:5002'
+        restart: always
+        depends_on:
+            - 'async-service'
+            - 'rabbitmq'
+        volumes:
+            - .:/app
+            - /app/order/node_modules
+        env_file:
+            - ./order/.env
+
+    user:
+        build:
+            dockerfile: Dockerfile
+            context: ./user
+        container_name: users
+        ports:
+            - '5001:5001'
+        restart: always
+        depends_on:
+            - 'order'
+            - 'rabbitmq'
+        volumes:
+            - .:/app
+            - /app/user/node_modules
+
+        env_file:
+            - ./user/.env
