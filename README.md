@@ -60,7 +60,7 @@
 
 -   Run all the three services concurrently by `pnpm dev` command. It will transpile (translate) the TypeScript code into JavaScript code on-the-fly (Just-In-Time or JIT).\
     OR
--   `pnpm start` command will compile TypeScript code into JavaScript code, making it executable in Node.js and runs the JavaScript code.
+    `pnpm start` command will compile TypeScript code into JavaScript code, making it executable in Node.js and runs the JavaScript code.
 
 Runs the app in the development mode. Open below links to view logs.\
 [http://localhost:5001](http://localhost:5001)\
